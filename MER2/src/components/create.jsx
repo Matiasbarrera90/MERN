@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 export default function Create() {
  const [form, setForm] = useState({
    Nombre: "",
-   Numero: "",
+   Numero: "", // Changed from Number to Numero
    email: "",
    rut: "",
  });
@@ -31,7 +31,7 @@ export default function Create() {
      return;
    });
 
-   setForm({ Nombre: "", Numero: "", email: "", rut: "" });
+   setForm({ Nombre: "", Numero: "", email: "", rut: "" }); // Changed from Number to Numero
    navigate("/");
  }
 
@@ -39,20 +39,14 @@ export default function Create() {
    <div>
      <h3>Crear nuevo cliente</h3>
      <form onSubmit={onSubmit}>
-
-     <div className="form-group">
-         <label>RUT:</label>
-         <input type="text" name="rut" value={form.rut} onChange={updateForm} className="form-control" />
-       </div>
-
        <div className="form-group">
          <label>Nombre:</label>
          <input type="text" name="Nombre" value={form.Nombre} onChange={updateForm} className="form-control" />
        </div>
        
        <div className="form-group">
-         <label>Número:</label>
-         <input type="text" name="Number" value={form.Numero} onChange={updateForm} className="form-control" />
+         <label>Numero:</label> {/* Changed the label from Number to Numero */}
+         <input type="text" name="Numero" value={form.Numero} onChange={updateForm} className="form-control" />
        </div>
 
        <div className="form-group">
@@ -60,10 +54,13 @@ export default function Create() {
          <input type="email" name="email" value={form.email} onChange={updateForm} className="form-control" />
        </div>
 
-
+       <div className="form-group">
+         <label>RUT:</label>
+         <input type="text" name="rut" value={form.rut} onChange={updateForm} className="form-control" />
+       </div>
 
        <div className="form-group">
-         <input type="submit" value="Crear Cliente" className="btn btn-primary" />
+         <input type="submit" value="Create Client" className="btn btn-primary" />
        </div>
      </form>
    </div>

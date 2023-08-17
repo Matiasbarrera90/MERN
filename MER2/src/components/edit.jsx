@@ -1,58 +1,65 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router";
- 
+
 export default function Edit() {
  const [form, setForm] = useState({
-   name: "",
-   position: "",
-   level: "",
-   records: [],
+   Nombre: "",
+   Numero: "",
+   email: "",
+   rut: "",
  });
  const params = useParams();
  const navigate = useNavigate();
- 
+
  useEffect(() => {
    async function fetchData() {
-     const id = params.id.toString();
-     const response = await fetch(`http://localhost:5050/record/${params.id.toString()}`);
- 
-     if (!response.ok) {
-       const message = `An error has occurred: ${response.statusText}`;
-       window.alert(message);
-       return;
+     try {
+       const id = params.id.toString();
+       const response = await fetch(`http://localhost:5050/record/${id}`);
+
+       if (!response.ok) {
+         const message = `An error has occurred: ${response.statusText}`;
+         window.alert(message);
+         return;
+       }
+
+       const record = await response.json();
+       if (record && record.error) {
+         window.alert(`Record with id ${id} not found`);
+         navigate("/");
+         return;
+       }
+
+       setForm({
+         Nombre: record.Nombre,
+         Numero: record.Numero,
+         email: record.email,
+         rut: record.rut,
+       });
+     } catch (error) {
+       console.error("Error fetching data:", error);
+       window.alert("An unexpected error occurred. Please try again.");
      }
- 
-     const record = await response.json();
-     if (!record) {
-       window.alert(`Record with id ${id} not found`);
-       navigate("/");
-       return;
-     }
- 
-     setForm(record);
    }
- 
+
    fetchData();
- 
-   return;
  }, [params.id, navigate]);
- 
- // These methods will update the state properties.
+
  function updateForm(value) {
    return setForm((prev) => {
      return { ...prev, ...value };
    });
  }
- 
+
  async function onSubmit(e) {
    e.preventDefault();
    const editedPerson = {
-     name: form.name,
-     position: form.position,
-     level: form.level,
+     Nombre: form.Nombre,
+     Numero: form.Numero,
+     email: form.email,
+     rut: form.rut,
    };
- 
-   // This will send a post request to update the data in the database.
+
    await fetch(`http://localhost:5050/record/${params.id}`, {
      method: "PATCH",
      body: JSON.stringify(editedPerson),
@@ -60,79 +67,63 @@ export default function Edit() {
        'Content-Type': 'application/json'
      },
    });
- 
+
    navigate("/");
  }
- 
- // This following section will display the form that takes input from the user to update the data.
+
+
  return (
    <div>
-     <h3>Update Record</h3>
+     <h3>Actualizar cliente</h3>
      <form onSubmit={onSubmit}>
        <div className="form-group">
-         <label htmlFor="name">Name: </label>
+         <label htmlFor="Nombre">Nombre</label>
          <input
            type="text"
+           required
            className="form-control"
-           id="name"
-           value={form.name}
-           onChange={(e) => updateForm({ name: e.target.value })}
+           id="Nombre"
+           value={form.Nombre}
+           onChange={(e) => updateForm({ Nombre: e.target.value })}
          />
        </div>
        <div className="form-group">
-         <label htmlFor="position">Position: </label>
+         <label htmlFor="Numero">Número</label>
          <input
            type="text"
+           required
            className="form-control"
-           id="position"
-           value={form.position}
-           onChange={(e) => updateForm({ position: e.target.value })}
+           id="Numero"
+           value={form.Numero}
+           onChange={(e) => updateForm({ Numero: e.target.value })}
          />
        </div>
        <div className="form-group">
-         <div className="form-check form-check-inline">
-           <input
-             className="form-check-input"
-             type="radio"
-             name="positionOptions"
-             id="positionIntern"
-             value="Intern"
-             checked={form.level === "Intern"}
-             onChange={(e) => updateForm({ level: e.target.value })}
-           />
-           <label htmlFor="positionIntern" className="form-check-label">Intern</label>
-         </div>
-         <div className="form-check form-check-inline">
-           <input
-             className="form-check-input"
-             type="radio"
-             name="positionOptions"
-             id="positionJunior"
-             value="Junior"
-             checked={form.level === "Junior"}
-             onChange={(e) => updateForm({ level: e.target.value })}
-           />
-           <label htmlFor="positionJunior" className="form-check-label">Junior</label>
-         </div>
-         <div className="form-check form-check-inline">
-           <input
-             className="form-check-input"
-             type="radio"
-             name="positionOptions"
-             id="positionSenior"
-             value="Senior"
-             checked={form.level === "Senior"}
-             onChange={(e) => updateForm({ level: e.target.value })}
-           />
-           <label htmlFor="positionSenior" className="form-check-label">Senior</label>
+         <label htmlFor="email">Email</label>
+         <input
+           type="email"
+           required
+           className="form-control"
+           id="email"
+           value={form.email}
+           onChange={(e) => updateForm({ email: e.target.value })}
+         />
        </div>
+       <div className="form-group">
+         <label htmlFor="rut">RUT</label>
+         <input
+           type="text"
+           required
+           className="form-control"
+           id="rut"
+           value={form.rut}
+           onChange={(e) => updateForm({ rut: e.target.value })}
+         />
        </div>
-       <br />
- 
        <div className="form-group">
          <input
            type="submit"
-           value="Update Record"
+           value="Actualizar cliente"
            className="btn btn-primary"
          />
        </div>
