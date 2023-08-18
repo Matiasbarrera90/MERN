@@ -9,13 +9,15 @@ import RecordList from "./components/recordList";
 import Edit from "./components/edit";
 import Create from "./components/create";
 import Productos from "./components/productos"
+import ProductList from "./components/productList"; // Assuming you named the component ProductList
+
  
 const App = () => {
  return (
    <div>
      <Navbar />
      <Routes>
-       <Route exact path="/" element={<RecordList />} />
+     <Route exact path="/" element={<><RecordList /><ProductList /></>} />
        <Route path="/edit/:id" element={<Edit />} />
        <Route path="/create" element={<Create />} />
        <Route path="/productos" element={<Productos />} />

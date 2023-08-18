@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router";
-
+/* para editar clientes */
 export default function Edit() {
  const [form, setForm] = useState({
    Nombre: "",

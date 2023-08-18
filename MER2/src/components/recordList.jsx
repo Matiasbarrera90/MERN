@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
- 
+ /* para ver clientes */
 const Record = (props) => (
  <tr>
    <td>{props.record.Nombre}</td>

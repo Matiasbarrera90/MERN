@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
-
+ /* para crear nuevo producto */
 export default function Productos() {
   const [form, setForm] = useState({
     name: "",

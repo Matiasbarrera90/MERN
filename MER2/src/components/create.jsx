@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 
+/* para crear clientes */
 export default function Create() {
  const [form, setForm] = useState({
    Nombre: "",
@@ -44,7 +45,7 @@ export default function Create() {
          <label>RUT:</label>
          <input type="text" name="rut" value={form.rut} onChange={updateForm} className="form-control" />
        </div>
-       
+
        <div className="form-group">
          <label>Nombre:</label>
          <input type="text" name="Nombre" value={form.Nombre} onChange={updateForm} className="form-control" />
