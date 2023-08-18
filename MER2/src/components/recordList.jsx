@@ -64,7 +64,7 @@ export default function RecordList() {
 
  return (
    <div>
-     <h3>Record List</h3>
+     <h3>Lista Clientes</h3>
      <table className="table table-striped" style={{ marginTop: 20 }}>
        <thead>
          <tr>
@@ -72,7 +72,7 @@ export default function RecordList() {
            <th>Número</th>
            <th>Email</th>
            <th>RUT</th>
-           <th>Action</th>
+           <th>Modificar</th>
          </tr>
        </thead>
        <tbody>{recordList()}</tbody>

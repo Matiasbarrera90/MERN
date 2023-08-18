@@ -39,13 +39,19 @@ export default function Create() {
    <div>
      <h3>Crear nuevo cliente</h3>
      <form onSubmit={onSubmit}>
+
+     <div className="form-group">
+         <label>RUT:</label>
+         <input type="text" name="rut" value={form.rut} onChange={updateForm} className="form-control" />
+       </div>
+       
        <div className="form-group">
          <label>Nombre:</label>
          <input type="text" name="Nombre" value={form.Nombre} onChange={updateForm} className="form-control" />
        </div>
        
        <div className="form-group">
-         <label>Numero:</label> {/* Changed the label from Number to Numero */}
+         <label>Número:</label> {/* Changed the label from Number to Numero */}
          <input type="text" name="Numero" value={form.Numero} onChange={updateForm} className="form-control" />
        </div>
 
@@ -54,10 +60,7 @@ export default function Create() {
          <input type="email" name="email" value={form.email} onChange={updateForm} className="form-control" />
        </div>
 
-       <div className="form-group">
-         <label>RUT:</label>
-         <input type="text" name="rut" value={form.rut} onChange={updateForm} className="form-control" />
-       </div>
+
 
        <div className="form-group">
          <input type="submit" value="Create Client" className="btn btn-primary" />
