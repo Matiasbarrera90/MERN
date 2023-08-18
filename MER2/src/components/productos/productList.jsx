@@ -8,13 +8,13 @@ const Product = (props) => (
    <td>{props.product.label}</td>
    <td>{props.product.variants[0]}</td>
    <td>
-     <Link className="btn btn-link" to={`/edit-product/${props.product._id}`}>Edit</Link> |
+     <Link className="btn btn-link" to={`/edit-product/${props.product._id}`}>Editar</Link> |
      <button className="btn btn-link"
        onClick={() => {
          props.deleteProduct(props.product._id);
        }}
      >
-       Delete
+       Borrar
      </button>
    </td>
  </tr>
