@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router";
-/* para editar productos */
+
 export default function EditProduct() {
   const [form, setForm] = useState({
     name: "",
@@ -8,6 +8,7 @@ export default function EditProduct() {
     label: "",
     variants: [""]
   });
+
   const params = useParams();
   const navigate = useNavigate();
 
@@ -46,8 +47,31 @@ export default function EditProduct() {
   }, [params.id, navigate]);
 
   function updateForm(value) {
-    return setForm((prev) => {
+    return setForm(prev => {
       return { ...prev, ...value };
+    });
+  }
+
+  function updateVariant(index, value) {
+    setForm(prev => {
+      const updatedVariants = [...prev.variants];
+      updatedVariants[index] = value;
+      return { ...prev, variants: updatedVariants };
+    });
+  }
+
+  function addVariant() {
+    setForm(prev => ({
+      ...prev,
+      variants: [...prev.variants, ""]
+    }));
+  }
+
+  function removeVariant(index) {
+    setForm(prev => {
+      const updatedVariants = [...prev.variants];
+      updatedVariants.splice(index, 1);
+      return { ...prev, variants: updatedVariants };
     });
   }
 
@@ -83,7 +107,7 @@ export default function EditProduct() {
             className="form-control"
             id="name"
             value={form.name}
-            onChange={(e) => updateForm({ name: e.target.value })}
+            onChange={e => updateForm({ name: e.target.value })}
           />
         </div>
         <div className="form-group">
@@ -94,7 +118,7 @@ export default function EditProduct() {
             className="form-control"
             id="price"
             value={form.price}
-            onChange={(e) => updateForm({ price: e.target.value })}
+            onChange={e => updateForm({ price: e.target.value })}
           />
         </div>
         <div className="form-group">
@@ -104,10 +128,29 @@ export default function EditProduct() {
             className="form-control"
             id="label"
             value={form.label}
-            onChange={(e) => updateForm({ label: e.target.value })}
+            onChange={e => updateForm({ label: e.target.value })}
           />
         </div>
-        {/* Add more inputs for other product attributes as required */}
+        <div className="form-group">
+          <label>Variants</label>
+          {form.variants.map((variant, index) => (
+            <div key={index} style={{ display: "flex", alignItems: "center" }}>
+              <input
+                type="text"
+                className="form-control"
+                value={variant}
+                onChange={e => updateVariant(index, e.target.value)}
+                style={{ marginRight: "10px" }}
+              />
+              <button type="button" onClick={() => removeVariant(index)}>
+                Remove
+              </button>
+            </div>
+          ))}
+          <button type="button" onClick={addVariant} style={{ marginTop: "10px" }}>
+            Add Variant
+          </button>
+        </div>
         <div className="form-group">
           <input
             type="submit"
@@ -119,3 +162,4 @@ export default function EditProduct() {
     </div>
   );
 }
+

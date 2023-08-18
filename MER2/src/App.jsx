@@ -5,11 +5,12 @@ import { Route, Routes } from "react-router-dom";
  
 // We import all the components we need in our app
 import Navbar from "./components/navbar";
-import RecordList from "./components/recordList";
-import Edit from "./components/edit";
-import Create from "./components/create";
-import Productos from "./components/productos"
-import ProductList from "./components/productList"; // Assuming you named the component ProductList
+import RecordList from "./components/clientes/recordList";
+import Edit from "./components/clientes/edit";
+import Create from "./components/clientes/create";
+import Productos from "./components/productos/productos"
+import ProductList from "./components/productos/productList"; 
+import EditProduct from "./components/productos/editProduct";
 
  
 const App = () => {
@@ -18,6 +19,7 @@ const App = () => {
      <Navbar />
      <Routes>
      <Route exact path="/" element={<><RecordList /><ProductList /></>} />
+     <Route path="/edit-product/:id" element={<EditProduct />} />
        <Route path="/edit/:id" element={<Edit />} />
        <Route path="/create" element={<Create />} />
        <Route path="/productos" element={<Productos />} />

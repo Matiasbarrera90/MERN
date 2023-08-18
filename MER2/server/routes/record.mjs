@@ -4,12 +4,27 @@ import { ObjectId } from "mongodb";
 
 const router = express.Router();
 
-// Get a list of all the records.
+// Get a record by RUT or a list of all the records if no RUT is provided.
 router.get("/", async (req, res) => {
   let collection = await db.collection("records");
-  let results = await collection.find({}).toArray();
-  res.send(results).status(200);
+  if (req.query.rut) {
+     let regex = new RegExp("^" + req.query.rut); // This creates a regex pattern to match the start of a string.
+     let query = { rut: regex };
+     let results = await collection.find(query).toArray();
+
+     if (results.length === 0) {
+         res.status(404).json({ message: "Not found" });
+         return;
+     }
+     
+     res.send(results).status(200);
+  } else {
+     let results = await collection.find({}).toArray();
+     res.send(results).status(200);
+  }
 });
+
+
 
 // Get a single record by id
 router.get("/:id", async (req, res) => {
