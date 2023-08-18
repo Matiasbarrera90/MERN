@@ -6,7 +6,6 @@ const Product = (props) => (
    <td>{props.product.name}</td>
    <td>{props.product.price}</td>
    <td>{props.product.label}</td>
-   { /* Display the first variant for simplicity. Adapt if needed. */ }
    <td>{props.product.variants[0]}</td>
    <td>
      <Link className="btn btn-link" to={`/edit-product/${props.product._id}`}>Edit</Link> |
@@ -71,7 +70,7 @@ export default function ProductList() {
            <th>Nombre</th>
            <th>Precio</th>
            <th>Etiqueta</th>
-           <th>Primera Variante</th> {/* Adjust this header as per your needs */}
+           <th>Primera Variante</th>
            <th>Modificar</th>
          </tr>
        </thead>
