@@ -49,6 +49,7 @@ router.post("/", async (req, res) => {
   res.send(result).status(204);
 });
 
+
 // Update a record by id.
 router.patch("/:id", async (req, res) => {
   const query = { _id: new ObjectId(req.params.id) };
