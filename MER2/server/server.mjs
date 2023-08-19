@@ -5,7 +5,6 @@ import records from "./routes/record.mjs";
 import productos from "./routes/productos.mjs";
 import businesses from "./routes/businesses.mjs"
 
-
 const PORT = process.env.PORT || 5050;
 const app = express();
 

@@ -32,7 +32,9 @@ export default function Navbar() {
              <NavLink className="nav-link" to="/create">
               Crear Cliente
              </NavLink>
-
+             <NavLink className="nav-link" to="/businessForm">
+              Crear Empresa
+             </NavLink>
              <NavLink className="nav-link" to="/productos">
               Crear Producto
              </NavLink>

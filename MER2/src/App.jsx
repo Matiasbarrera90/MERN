@@ -11,8 +11,8 @@ import Create from "./components/clientes/create";
 import Productos from "./components/productos/productos"
 import ProductList from "./components/productos/productList"; 
 import EditProduct from "./components/productos/editProduct";
+import BusinessForm from "./components/clientes/businessForm";
 
- 
 const App = () => {
  return (
    <div>
@@ -23,6 +23,7 @@ const App = () => {
        <Route path="/edit/:id" element={<Edit />} />
        <Route path="/create" element={<Create />} />
        <Route path="/productos" element={<Productos />} />
+       <Route path="/businessForm" element={<BusinessForm />} />
      </Routes>
    </div>
  );
